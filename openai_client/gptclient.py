@@ -10,6 +10,7 @@ convmap = {}
 class GptClient:
     def __init__(self):
         openai.api_key = os.environ["OPENAI_API_KEY"]
+    # tailoring is disabled because it doesn't really work well on a chat with historical context. Too many tokens $$$
     def send_message(self, message, tailoring="please tailor the response for a person which doesn't know much about science", conversation_id=None):
         conversation_history = ""
         if conversation_id and conversation_id in convmap:
