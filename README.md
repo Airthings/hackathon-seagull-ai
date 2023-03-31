@@ -1,6 +1,7 @@
 # Swagger generated server
-
+```
 export OPEN_API_KEY=<yourkey>
+```
 
 ```
 pip3 install -r requirements.txt
