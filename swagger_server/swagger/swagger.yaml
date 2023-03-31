@@ -1,0 +1,63 @@
+openapi: 3.0.3
+info:
+  title: GPTAssistant
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://localhost:8080
+paths:
+  /gptchat:
+    post:
+      summary: Get answer from gpt
+      description: Get a message from gpt
+      operationId: gpt_chat
+      requestBody:
+        description: message to gpt
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/gptMessage'
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gptMessageRes'
+        "405":
+          description: Validation exception
+        "500":
+          description: Internal Server Error
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+components:
+  schemas:
+    gptMessage:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+          example: "hello, world"
+        tailoring:
+          type: string
+          example: tailor the answer for a sailor lost in an island
+        conversation_id:
+          type: string
+    gptMessageRes:
+      type: object
+      properties:
+        message:
+          type: string
+        status_code:
+          type: integer
+        conversation_id:
+          type: string
+      example:
+        status_code: 0
+        conversation_id: conversation_id
+        message: message
+
